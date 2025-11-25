@@ -12,29 +12,16 @@ import {
 
 const router = express.Router();
 
-// @ docs Get All books
+// @ docs Get All books and Create a New Book
 // @ route /api/books
-// @ method GET
-router.get("/", getAllBooks);
+// @ method GET ,POST
 
-// @ docs Get Single Book
+router.route("/").get(getAllBooks).post(validationSchema(), createBook);
+
+// @ docs Get Single Book and Update Book and Delete Book
 // @ route /api/books/:bookId
-// @ method GET
-router.get("/:bookId", getBook);
+// @ method GET,PUT,DELETE
 
-// @ docs Create a New Book
-// @ route /api/books
-// @ method POST
-router.post("/", validationSchema(), createBook);
-
-// @ docs Update Book
-// @ route /api/books/:bookId
-// @ method PUT
-router.put("/:bookId", updateBook);
-
-// @ docs Delete Book
-// @ route /api/books/:bookId
-// @ method DELETE
-router.delete("/:bookId", deleteBook);
+router.route("/:bookId").get(getBook).put(updateBook).delete(deleteBook);
 
 export default router;
